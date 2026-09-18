@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Comparativo RIA — Versatille Condominium</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #FAF8FC;
+    --ink: #211A2E;
+    --ink-soft: #6E6485;
+    --purple: #3B2F62;
+    --purple-deep: #241C3D;
+    --magenta: #CE2757;
+    --magenta-tint: #FBE8ED;
+    --green: #1E7A34;
+    --green-tint: #E8F3EA;
+    --line: #E4DEEF;
+    --card: #FFFFFF;
+    --amber: #B4790B;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{
+    font-family:'Space Grotesk', sans-serif;
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+  .wrap{max-width:1180px;margin:0 auto;padding:0 28px 80px;}
+
+  /* ---------- Header ---------- */
+  header{
+    padding:36px 0 30px;
+    border-bottom:1px solid var(--line);
+    margin-bottom:32px;
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+    gap:24px;
+    flex-wrap:wrap;
+  }
+  .brand{display:flex;align-items:center;gap:14px;}
+  .brand img{height:34px;width:auto;display:block;}
+  .brand-divider{width:1px;height:28px;background:var(--line);}
+  .brand-sub{font-size:13px;color:var(--ink-soft);font-weight:500;}
+  h1{font-size:30px;font-weight:600;color:var(--purple-deep);max-width:640px;line-height:1.15;}
+  .lede{font-size:15px;color:var(--ink-soft);max-width:420px;line-height:1.5;text-align:right;}
+
+  /* ---------- Tower summary ---------- */
+  .towers{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+    margin-bottom:40px;
+  }
+  .tower{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:4px;
+    overflow:hidden;
+  }
+  .tower-head{
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:600;
+    font-size:15px;
+    color:#fff;
+    background:var(--purple);
+    padding:10px 18px;
+  }
+  .tower-body{display:grid;grid-template-columns:1fr 1fr;}
+  .elev-card{
+    padding:18px 18px 16px;
+    border-left:1px solid var(--line);
+  }
+  .elev-card:first-child{border-left:none;}
+  .elev-id{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink-soft);letter-spacing:0.02em;}
+  .elev-role{font-weight:600;font-size:15px;margin-top:2px;}
+  .status-pill{
+    display:inline-block;
+    margin-top:10px;
+    padding:4px 10px;
+    border-radius:3px;
+    font-size:11.5px;
+    font-weight:600;
+    letter-spacing:0.02em;
+  }
+  .status-apto{background:var(--green-tint);color:var(--green);}
+  .status-naoapto{background:var(--magenta-tint);color:var(--magenta);}
+  .elev-stats{
+    display:flex;
+    gap:14px;
+    margin-top:12px;
+    font-size:12.5px;
+    color:var(--ink-soft);
+  }
+  .elev-stats b{color:var(--ink);font-weight:600;}
+  .impeditiva-note{
+    margin-top:8px;
+    font-size:12px;
+    color:var(--magenta);
+    font-weight:500;
+  }
+
+  /* ---------- Section labels ---------- */
+  .section-label{
+    font-size:12px;
+    font-weight:600;
+    color:var(--ink-soft);
+    margin-bottom:6px;
+  }
+  .section-title{font-size:21px;font-weight:600;color:var(--purple-deep);margin-bottom:4px;}
+  .section-desc{font-size:14px;color:var(--ink-soft);max-width:640px;line-height:1.5;margin-bottom:22px;}
+  section{margin-bottom:52px;}
+
+  /* ---------- Controls ---------- */
+  .controls{
+    display:flex;
+    gap:10px;
+    align-items:center;
+    flex-wrap:wrap;
+    margin-bottom:18px;
+  }
+  .seg{
+    display:flex;
+    border:1px solid var(--line);
+    border-radius:4px;
+    overflow:hidden;
+    background:var(--card);
+  }
+  .seg button{
+    font-family:'IBM Plex Sans',sans-serif;
+    border:none;
+    background:transparent;
+    padding:8px 14px;
+    font-size:13px;
+    font-weight:500;
+    color:var(--ink-soft);
+    cursor:pointer;
+    border-right:1px solid var(--line);
+  }
+  .seg button:last-child{border-right:none;}
+  .seg button.active{background:var(--purple);color:#fff;}
+  .search{
+    border:1px solid var(--line);
+    border-radius:4px;
+    padding:8px 12px;
+    font-size:13px;
+    font-family:'IBM Plex Sans',sans-serif;
+    background:var(--card);
+    min-width:220px;
+    color:var(--ink);
+  }
+  .search:focus{outline:2px solid var(--purple);outline-offset:-1px;}
+  .count-note{font-size:12.5px;color:var(--ink-soft);margin-left:auto;}
+
+  /* ---------- Matrix ---------- */
+  .matrix{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:4px;
+    overflow:hidden;
+  }
+  .matrix-head{
+    display:grid;
+    grid-template-columns:44px 1fr 190px;
+    background:var(--purple-deep);
+    color:#fff;
+  }
+  .matrix-head-elevs{display:grid;grid-template-columns:repeat(4,1fr);}
+  .matrix-head > div, .matrix-head-elevs > div{
+    padding:11px 10px;
+    font-size:11.5px;
+    font-weight:600;
+    letter-spacing:0.02em;
+  }
+  .matrix-head-elevs > div{text-align:center;border-left:1px solid rgba(255,255,255,0.12);}
+  .mh-item{grid-column:1 / 3;display:flex;align-items:center;padding-left:16px;}
+  .mh-num{padding-left:16px !important;}
+  .row{
+    display:grid;
+    grid-template-columns:44px 1fr 190px;
+    border-top:1px solid var(--line);
+    cursor:pointer;
+  }
+  .row:hover{background:#FCFAFE;}
+  .row.expanded{background:#FCFAFE;}
+  .cell-num{
+    display:flex;align-items:center;justify-content:center;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    color:var(--ink-soft);
+  }
+  .cell-item{padding:12px 12px 12px 0;display:flex;flex-direction:column;justify-content:center;gap:2px;}
+  .cell-desc{font-size:13.5px;font-weight:500;color:var(--ink);line-height:1.3;}
+  .cell-sys{font-size:11px;color:var(--ink-soft);}
+  .cell-dots{display:grid;grid-template-columns:repeat(4,1fr);align-items:center;}
+  .dot-wrap{display:flex;align-items:center;justify-content:center;height:100%;}
+  .dot{width:11px;height:11px;border-radius:50%;background:var(--line);}
+  .dot.on{background:var(--magenta);}
+  .dot.on.imped{background:var(--purple-deep);box-shadow:0 0 0 3px var(--magenta-tint);}
+  .overlap-badge{
+    font-size:10.5px;
+    font-weight:600;
+    padding:2px 7px;
+    border-radius:9px;
+    margin-left:8px;
+  }
+  .ov-4{background:var(--purple-deep);color:#fff;}
+  .ov-3{background:var(--purple);color:#fff;}
+  .ov-2{background:#DCD5EC;color:var(--purple-deep);}
+  .ov-1{background:var(--line);color:var(--ink-soft);}
+
+  .row-detail{
+    grid-column:1 / -1;
+    background:#F7F4FB;
+    border-top:1px solid var(--line);
+    padding:14px 16px 16px 60px;
+    display:none;
+  }
+  .row.expanded + .row-detail{display:block;}
+  .detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px 24px;}
+  .detail-item{font-size:12.5px;line-height:1.45;}
+  .detail-item .who{font-weight:600;color:var(--purple-deep);display:block;margin-bottom:2px;}
+  .detail-item.imped .who{color:var(--magenta);}
+  .detail-item.imped .who:after{content:" · impeditiva";font-weight:500;font-size:11px;}
+  .detail-item.muted{color:var(--ink-soft);}
+
+  /* ---------- System breakdown ---------- */
+  .sysgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+  .syscol{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:16px;}
+  .syscol h4{font-family:'Space Grotesk',sans-serif;font-size:13.5px;font-weight:600;margin:0 0 12px;color:var(--purple-deep);}
+  .barrow{display:grid;grid-template-columns:100px 1fr 20px;align-items:center;gap:8px;margin-bottom:7px;}
+  .barrow .lbl{font-size:11px;color:var(--ink-soft);}
+  .bartrack{height:8px;background:var(--bg);border-radius:2px;overflow:hidden;}
+  .barfill{height:100%;background:var(--magenta);border-radius:2px;}
+  .barrow .val{font-size:11px;color:var(--ink-soft);text-align:right;font-family:'IBM Plex Mono',monospace;}
+
+  footer{
+    margin-top:56px;
+    padding-top:20px;
+    border-top:1px solid var(--line);
+    font-size:12px;
+    color:var(--ink-soft);
+    line-height:1.6;
+  }
+
+  @media (max-width:860px){
+    .towers{grid-template-columns:1fr;}
+    .tower-body{grid-template-columns:1fr 1fr;}
+    header{flex-direction:column;align-items:flex-start;}
+    .lede{text-align:left;}
+    .matrix-head, .row{grid-template-columns:36px 1fr 150px;}
+    .sysgrid{grid-template-columns:1fr 1fr;}
+    .detail-grid{grid-template-columns:1fr;}
+  }
+  @media (max-width:560px){
+    .tower-body{grid-template-columns:1fr;}
+    .elev-card:nth-child(2){border-left:none;border-top:1px solid var(--line);}
+    .matrix-head-elevs > div{font-size:9.5px;padding:11px 4px;}
+    .cell-desc{font-size:12.5px;}
+    .sysgrid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="brand">
+      <img src="data:image/png;base64,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" alt="Staff Consultoria Técnica">
+      <div class="brand-divider"></div>
+      <div class="brand-sub">Consultoria Técnica</div>
+    </div>
+  </header>
+
+  <h1 style="margin-bottom:8px;">Não conformidades em comum entre as quatro torres</h1>
+  <p class="lede" style="text-align:left;max-width:680px;margin-bottom:36px;">
+    Cruzamento do Quadro 3 (Não Conformidades Identificadas) dos RIAs 81379, 81380, 81381 e 81382 —
+    Torre Norte e Torre Sul do Versatille Condominium, elevadores de serviço e social.
+  </p>
+
+  <section>
+    <div class="section-label">Situação por elevador</div>
+    <div class="towers">
+      <div class="tower" data-tower="norte">
+        <div class="tower-head">Torre Norte</div>
+        <div class="tower-body" id="tower-norte"></div>
+      </div>
+      <div class="tower" data-tower="sul">
+        <div class="tower-head">Torre Sul</div>
+        <div class="tower-body" id="tower-sul"></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-title">Itens que se repetem entre as torres</div>
+    <p class="section-desc">
+      Cada linha é um item do checklist reprovado em pelo menos um elevador. O selo indica em quantas
+      das quatro unidades aquele mesmo item apareceu como não conforme — quanto mais alto, mais
+      sistêmico é o problema (aponta para causa de projeto, instalação ou manutenção comum às torres,
+      e não uma falha isolada de uma unidade).
+    </p>
+    <div class="controls">
+      <div class="seg" id="seg-filter">
+        <button data-f="all" class="active">Todos os itens</button>
+        <button data-f="4">Comuns às 4 torres</button>
+        <button data-f="3">Comuns a 3</button>
+        <button data-f="2">Comuns a 2</button>
+        <button data-f="1">Únicos de 1</button>
+      </div>
+      <input class="search" id="search" placeholder="Buscar por item, sistema ou descrição…">
+      <div class="count-note" id="count-note"></div>
+    </div>
+
+    <div class="matrix">
+      <div class="matrix-head">
+        <div class="mh-num">Item</div>
+        <div class="mh-item">Descrição do checklist</div>
+        <div class="matrix-head-elevs">
+          <div>TN Serviço<br>81382</div>
+          <div>TN Social<br>81381</div>
+          <div>TS Serviço<br>81379</div>
+          <div>TS Social<br>81380</div>
+        </div>
+      </div>
+      <div id="rows"></div>
+    </div>
+  </section>
+
+  <section style="margin-bottom:20px;">
+    <div class="section-title">Onde as não conformidades se concentram</div>
+    <p class="section-desc">Contagem de itens não conformes por sistema do checklist, em cada elevador.</p>
+    <div class="sysgrid" id="sysgrid"></div>
+  </section>
+
+  <footer>
+    Elaborado pela Staff Consultoria Técnica a partir dos Relatórios de Inspeção Anual de Elevadores
+    (RIA) individuais de cada unidade. A numeração de item segue o checklist padrão de 108 itens
+    aplicado nas quatro inspeções. Material de apoio visual — os laudos individuais completos
+    permanecem o documento técnico de referência.
+  </footer>
+
+</div>
+
+<script>
+const DATA = {"elevadores": {"81382": {"nome": "81382 · Torre Norte (Serviço)", "apto": false, "impeditiva": 95, "c": 46, "nc": 36, "na": 26}, "81381": {"nome": "81381 · Social Torre Norte", "apto": true, "impeditiva": null, "c": 55, "nc": 24, "na": 29}, "81379": {"nome": "81379 · Serviço Torre Sul", "apto": true, "impeditiva": null, "c": 52, "nc": 26, "na": 30}, "81380": {"nome": "81380 · Social Torre Sul", "apto": false, "impeditiva": 97, "c": 55, "nc": 24, "na": 29}}, "sistemas_order": ["Cabina", "Pavimentos", "Casa de Máquinas", "Cabina em Cima", "Caixa de Corrida", "Poço", "Geral"], "sistema_counts": {"81382": {"Cabina": 1, "Pavimentos": 5, "Casa de Máquinas": 11, "Cabina em Cima": 6, "Caixa de Corrida": 6, "Poço": 7, "Geral": 0}, "81381": {"Cabina": 1, "Pavimentos": 3, "Casa de Máquinas": 8, "Cabina em Cima": 4, "Caixa de Corrida": 4, "Poço": 4, "Geral": 0}, "81379": {"Cabina": 1, "Pavimentos": 3, "Casa de Máquinas": 10, "Cabina em Cima": 2, "Caixa de Corrida": 5, "Poço": 5, "Geral": 0}, "81380": {"Cabina": 2, "Pavimentos": 2, "Casa de Máquinas": 5, "Cabina em Cima": 4, "Caixa de Corrida": 5, "Poço": 6, "Geral": 0}}, "items": [{"num": 16, "sistema": "Cabina", "desc": "Luz de emergência da cabina", "elevadores": {"81382": "Cabina sem iluminação de emergência.", "81381": "Ausência de iluminação de emergência na cabina.", "81379": "Cabina não possui iluminação de emergência.", "81380": "Cabina sem iluminação de emergência."}}, {"num": 21, "sistema": "Pavimentos", "desc": "Soleiras e corrediças de porta", "elevadores": {"81382": "Soleiras com presença de sujidade. Corrediças de pavimento apresentando desgaste e folga excessiva.", "81381": "Soleiras das corrediças das portas apresentando excesso de sujidade e desgaste acentuado.", "81379": "Não conformidade sinalizada na planilha de campo, sem descrição detalhada — a confirmar com o responsável técnico.", "81380": "Corrediças apresentam desgaste, e a soleira encontra-se com acúmulo acentuado de sujidade."}}, {"num": 39, "sistema": "Casa de Máquinas", "desc": "Contato de segurança da porta de inspeção", "elevadores": {"81382": "Não conformidade sinalizada na planilha de campo, sem descrição detalhada — a confirmar com o responsável técnico.", "81381": "Não conformidade sinalizada na planilha de campo, sem descrição detalhada — a confirmar com o responsável técnico.", "81379": "Não conformidade sinalizada na planilha de campo, sem descrição detalhada — a confirmar com o responsável técnico.", "81380": "Contato de segurança encontrado jumpeado, em desacordo com as prescrições de segurança da NBR NM 207."}}, {"num": 49, "sistema": "Casa de Máquinas", "desc": "Cabo do regulador de velocidade", "elevadores": {"81382": "Necessidade de substituição do cabo do regulador de velocidade.", "81381": "Cabo do regulador de velocidade apresenta sinais de oxidação acentuada.", "81379": "Cabo apresenta sujeira e oxidação, sendo necessário programar sua substituição.", "81380": "Cabo apresenta acentuada oxidação, sendo necessário programar sua substituição."}}, {"num": 74, "sistema": "Cabina em Cima", "desc": "Lubrificador automático de guias", "elevadores": {"81382": "Cabina desprovida de lubrificadores para as guias.", "81381": "Ausência de lubrificadores.", "81379": "Ausência de lubrificadores automáticos.", "81380": "Ausência de lubrificadores."}}, {"num": 77, "sistema": "Caixa de Corrida", "desc": "Guias e suportes", "elevadores": {"81382": "Guias e suportes apresentam excesso de sujidade, sendo necessária a realização de limpeza.", "81381": "Necessidade de manutenção/limpeza.", "81379": "Necessária limpeza nos suportes de guias, com verificação dos apertos e fixações.", "81380": "Apresentam acúmulo de sujidade. Necessária limpeza imediata."}}, {"num": 79, "sistema": "Caixa de Corrida", "desc": "Cabos de manobra e fiações", "elevadores": {"81382": "Ausência de proteção nas calhas.", "81381": "Cabos soltos, com utilização de elementos inadequados para sua fixação.", "81379": "Ausência de tampas de proteção nas calhas.", "81380": "Calhas de passagem de cabos sem proteção adequada (tampa)."}}, {"num": 89, "sistema": "Caixa de Corrida", "desc": "Placas de sinalização / receptores", "elevadores": {"81382": "Caixa desprovida de placas de sinalização de segurança.", "81381": "Caixa de corrida sem placas de sinalização de segurança.", "81379": "Caixa de corrida sem placas de sinalização de risco.", "81380": "Caixa de corrida sem placas de sinalização de risco."}}, {"num": 105, "sistema": "Poço", "desc": "Pintura do paralelepípedo de segurança", "elevadores": {"81382": "Ausência de sinalização (pintura) do espaço de segurança.", "81381": "Ausência de pintura/sinalização.", "81379": "Ausência de pintura de segurança.", "81380": "Ausência de pintura da área segura."}}, {"num": 106, "sistema": "Poço", "desc": "Coletor de óleo das guias", "elevadores": {"81382": "Coletores de óleo saturados, sendo necessária a retirada do óleo acumulado e a limpeza dos coletores.", "81381": "Coletores saturados, sendo necessária a execução de manutenção e limpeza.", "81379": "Necessário remover o excesso de óleo presente no coletor.", "81380": "Necessário recolher o excesso de óleo e realizar a limpeza do poço."}}, {"num": 22, "sistema": "Pavimentos", "desc": "Nivelamento", "elevadores": {"81382": "Elevador apresenta intermitência no nivelamento, com ocorrência de nivelamento irregular em todos os andares.", "81381": "Elevador apresenta intermitência no nivelamento, com ocorrência de nivelamento irregular.", "81379": "Desnivelamento entre a cabina e o pavimento acima da tolerância normativa (±10 mm — NBR NM 207), com risco de tropeço."}}, {"num": 26, "sistema": "Pavimentos", "desc": "Botoeira com braile", "elevadores": {"81382": "Botoeira sem leitura em braile.", "81381": "Ausência de botoeiras com leitor em braile.", "81379": "Botoeiras sem sinalização em braile, em desacordo com a NBR NM 207 (acessibilidade)."}}, {"num": 32, "sistema": "Casa de Máquinas", "desc": "Bateria e fonte de luz de emergência", "elevadores": {"81382": "Não conforme, sem detalhamento adicional registrado na planilha de campo — confirmar com o responsável técnico.", "81379": "Não conformidade sinalizada na planilha de campo, sem descrição detalhada — a confirmar com o responsável técnico.", "81380": "Não conformidade sinalizada na planilha de campo, sem descrição detalhada — a confirmar com o responsável técnico."}}, {"num": 33, "sistema": "Casa de Máquinas", "desc": "Máquina de tração", "elevadores": {"81382": "Máquina de tração com excesso de sujidade e sem placa de identificação das características técnicas.", "81381": "Apresenta vazamento. Necessário realizar limpeza e lubrificação.", "81379": "Pequeno vazamento de óleo identificado na máquina de tração, indicando necessidade de manutenção preventiva."}}, {"num": 40, "sistema": "Casa de Máquinas", "desc": "Contato de segurança da porta de inspeção", "elevadores": {"81382": "Contato não funciona.", "81379": "Não conformidade sinalizada na planilha de campo, sem descrição detalhada — a confirmar com o responsável técnico.", "81380": "Contato de segurança encontrado jumpeado, em desacordo com as prescrições de segurança da NBR NM 207."}}, {"num": 48, "sistema": "Casa de Máquinas", "desc": "Polia do regulador de velocidade", "elevadores": {"81382": "Presença de oxidação no componente.", "81381": "Limitador operacional em funcionamento, porém apresenta sinais de corrosão acentuada. Recomenda-se programar sua substituição.", "81379": "Necessária limpeza e manutenção na polia do regulador de velocidade."}}, {"num": 66, "sistema": "Cabina em Cima", "desc": "Chaves de indução / eletrônica", "elevadores": {"81382": "Necessidade de limpeza do componente.", "81381": "Componente apresentando sujidade, sendo necessária a execução de limpeza.", "81380": "Item apresenta sujidade, sendo necessária a realização de limpeza."}}, {"num": 80, "sistema": "Caixa de Corrida", "desc": "Porta de pavimento (dispositivo de arraste, chave de emergência)", "elevadores": {"81382": "Sistema de arraste das portas de pavimento requer manutenção, apresentando pontos de corrosão e necessidade de limpeza. Constatado desgaste dos roletes das folhas rápida e lenta em alguns pavimentos, sendo necessária sua substituição.", "81379": "Régua de deslizamento das corrediças do carrinho apresenta acentuada oxidação, e a rampa apresenta folga.", "81380": "Contato sem tampa de proteção."}}, {"num": 94, "sistema": "Poço", "desc": "Aparelho de segurança (inferior)", "elevadores": {"81382": "Sistema de freio requer manutenção imediata.", "81381": "Sujidade presente no aparelho de segurança da cabina.", "81379": "Muita sujidade presente."}}, {"num": 99, "sistema": "Poço", "desc": "Polia tensora", "elevadores": {"81382": "Polia com inclinação em desacordo com o padrão do equipamento. Necessário encurtamento do cabo do regulador de velocidade. Equipamento apresentando excesso de sujidade.", "81379": "Inclinação incorreta.", "81380": "Cabo do regulador apresenta inclinação fora do padrão e acentuada sujidade, sendo necessário seu encurtamento e a realização de limpeza."}}, {"num": 100, "sistema": "Poço", "desc": "Fundo do poço seco e impermeabilizado", "elevadores": {"81382": "Piso do poço apresentando excesso de sujidade, sendo necessária a execução de limpeza.", "81379": "Óleo presente no fundo do poço, sendo necessária raspagem, higienização e pintura.", "81380": "Fundo do poço com presença de óleo, sendo necessária limpeza e aplicação de pintura de sinalização de segurança."}}, {"num": 20, "sistema": "Pavimentos", "desc": "Portas de pavimento", "elevadores": {"81382": "Portas de pavimento apresentando interferência entre as folhas durante o fechamento.", "81380": "Necessário ajuste nas portas de pavimento, que apresentam folga acentuada entre a porta e o batente, além de falhas no alinhamento e fechamento."}}, {"num": 27, "sistema": "Casa de Máquinas", "desc": "Conexões e fiações no painel de força", "elevadores": {"81379": "Conexões elétricas sem terminal de ligação adequado, em desacordo com as prescrições de segurança da NBR NM 207.", "81380": "Cabos sem terminais de fixação nas extremidades."}}, {"num": 31, "sistema": "Casa de Máquinas", "desc": "Quadro de comando", "elevadores": {"81382": "Quadro de comando fechado com abraçadeiras, necessitando correção e limpeza. Tampa da caixa de resistência sem fixação adequada.", "81381": "Ausência de interfone e diagrama elétrico."}}, {"num": 34, "sistema": "Casa de Máquinas", "desc": "Motor de tração (redutor)", "elevadores": {"81382": "Vazamento na tampa de verificação da máquina de tração.", "81381": "Vazamento de óleo identificado."}}, {"num": 54, "sistema": "Casa de Máquinas", "desc": "Porta com fechadura", "elevadores": {"81381": "Não conformidade sinalizada na planilha de campo, sem descrição detalhada — a confirmar com o responsável técnico.", "81379": "Não conformidade sinalizada na planilha de campo, sem descrição detalhada — a confirmar com o responsável técnico."}}, {"num": 61, "sistema": "Casa de Máquinas", "desc": "Materiais e instalações estranhas ao elevador", "elevadores": {"81382": "Equipamentos de terceiros na casa de máquinas.", "81379": "Não conformidade sinalizada na planilha de campo, sem descrição detalhada — a confirmar com o responsável técnico."}}, {"num": 64, "sistema": "Cabina em Cima", "desc": "Corrediça da cabina (superior e inferior)", "elevadores": {"81382": "Corrediça apresentando folga excessiva e necessidade de limpeza.", "81381": "Corrediça de cabina apresentando folga excessiva e necessidade de limpeza."}}, {"num": 68, "sistema": "Cabina em Cima", "desc": "Operador de portas", "elevadores": {"81382": "Cabo de sincronização das portas de cabina necessitando de ajuste no tensionamento, manutenção e limpeza.", "81380": "Operador de porta apresenta tensionamento de correia em desacordo com o padrão adequado."}}, {"num": 70, "sistema": "Cabina em Cima", "desc": "Rampa articulada", "elevadores": {"81382": "Necessidade de limpeza.", "81379": "Conjunto apresenta acúmulo de oxidação, com oportunidade de melhoria na limpeza."}}, {"num": 78, "sistema": "Caixa de Corrida", "desc": "Corrediça do contrapeso", "elevadores": {"81382": "Corrediça apresenta excesso de sujidade, sendo necessária a realização de limpeza.", "81381": "Necessidade de limpeza."}}, {"num": 81, "sistema": "Caixa de Corrida", "desc": "Rampa móvel", "elevadores": {"81379": "Roletes apresentam desgaste, com necessidade de substituição.", "81380": "Régua de deslizamento das corrediças do carrinho apresenta acentuada oxidação, e a rampa apresenta folga."}}, {"num": 93, "sistema": "Poço", "desc": "Corrediça inferior (cabina)", "elevadores": {"81382": "Corrediça de cabina apresentando excesso de sujidade e folga excessiva.", "81381": "Sujidade presente; realizar a limpeza."}}, {"num": 13, "sistema": "Cabina", "desc": "Corrediça das portas de cabina", "elevadores": {"81380": "Corrediças da cabina apresentam folga."}}, {"num": 19, "sistema": "Pavimentos", "desc": "Indicadores de posição de pavimento instalados", "elevadores": {"81382": "Indicador de posição disponível apenas no pavimento térreo. Setas de indicação nos demais pavimentos apresentando falha de funcionamento."}}, {"num": 37, "sistema": "Casa de Máquinas", "desc": "Rolamento / bucha da máquina de tração", "elevadores": {"81381": "Necessário substituir a tampa do reservatório."}}, {"num": 43, "sistema": "Casa de Máquinas", "desc": "Polia de tração", "elevadores": {"81382": "Ausência de limpeza e lubrificação."}}, {"num": 44, "sistema": "Casa de Máquinas", "desc": "Cabo de tração", "elevadores": {"81379": "Cabos de tração apresentam sujeira e oxidação, sendo necessária a realização de manutenção/limpeza e posterior avaliação técnica quanto à necessidade de substituição."}}, {"num": 60, "sistema": "Casa de Máquinas", "desc": "Acesso livre à casa de máquinas", "elevadores": {"81382": "Não conformidade sinalizada na planilha de campo, sem descrição detalhada — a confirmar com o responsável técnico."}}, {"num": 65, "sistema": "Cabina em Cima", "desc": "Suspensão do cabo de manobra", "elevadores": {"81382": "Necessidade de limpeza."}}, {"num": 71, "sistema": "Cabina em Cima", "desc": "Teto / estrutura", "elevadores": {"81381": "Necessária limpeza e organização da fiação. Constatada a presença de objetos estranhos ao equipamento sobre o teto da cabina."}}, {"num": 73, "sistema": "Cabina em Cima", "desc": "Iluminação com proteção e interruptor (NR-10)", "elevadores": {"81380": "Ausência de proteção de contatos."}}, {"num": 82, "sistema": "Caixa de Corrida", "desc": "Contrapeso", "elevadores": {"81382": "Corrediças apresentando folga. Lubrificadores automáticos sem óleo e necessidade de limpeza dos componentes."}}, {"num": 92, "sistema": "Poço", "desc": "Limites inferiores", "elevadores": {"81380": "Limite sem a tampa de proteção do contato."}}, {"num": 95, "sistema": "Poço", "desc": "Cabo / corrente de compensação", "elevadores": {"81382": "Fixação da corrente de compensação em desacordo com o padrão construtivo do equipamento. [NÃO CONFORMIDADE IMPEDITIVA]"}}, {"num": 97, "sistema": "Poço", "desc": "Mola para-choque / amortecedor hidráulico", "elevadores": {"81380": "Buffers apresentam alto índice de desgaste, comprometendo a segurança da máquina e dos passageiros, sendo necessária sua substituição. [NÃO CONFORMIDADE IMPEDITIVA]"}}]};
+
+const ELEV_ORDER = ["81382","81381","81379","81380"];
+const ELEV_SHORT = {
+  "81382":"TN Serviço","81381":"TN Social","81379":"TS Serviço","81380":"TS Social"
+};
+
+function statusPillHTML(meta){
+  return meta.apto
+    ? '<span class="status-pill status-apto">Apto</span>'
+    : '<span class="status-pill status-naoapto">Não apto</span>';
+}
+
+function renderTowers(){
+  const norteIds = ["81382","81381"];
+  const sulIds = ["81379","81380"];
+  const roleFor = id => (id==="81382"||id==="81379") ? "Serviço" : "Social";
+
+  function cardHTML(id){
+    const m = DATA.elevadores[id];
+    let imped = "";
+    if(m.impeditiva){
+      imped = `<div class="impeditiva-note">Impeditiva: item ${m.impeditiva}</div>`;
+    }
+    return `
+      <div class="elev-card">
+        <div class="elev-id">${id}</div>
+        <div class="elev-role">${roleFor(id)}</div>
+        ${statusPillHTML(m)}
+        <div class="elev-stats">
+          <span><b>${m.c}</b> C</span>
+          <span><b>${m.nc}</b> NC</span>
+          <span><b>${m.na}</b> N/A</span>
+        </div>
+        ${imped}
+      </div>`;
+  }
+  document.getElementById("tower-norte").innerHTML = norteIds.map(cardHTML).join("");
+  document.getElementById("tower-sul").innerHTML = sulIds.map(cardHTML).join("");
+}
+
+let currentFilter = "all";
+let currentSearch = "";
+let expandedNum = null;
+
+function overlapClass(n){ return "ov-"+n; }
+
+function passesFilter(item){
+  const n = Object.keys(item.elevadores).length;
+  if(currentFilter !== "all" && String(n) !== currentFilter) return false;
+  if(currentSearch){
+    const hay = (item.num + " " + item.sistema + " " + item.desc).toLowerCase();
+    if(!hay.includes(currentSearch.toLowerCase())) return false;
+  }
+  return true;
+}
+
+function renderRows(){
+  const rows = DATA.items.filter(passesFilter);
+  document.getElementById("count-note").textContent = rows.length + " de " + DATA.items.length + " itens";
+
+  const html = rows.map(item => {
+    const n = Object.keys(item.elevadores).length;
+    const dots = ELEV_ORDER.map(id => {
+      const has = item.elevadores.hasOwnProperty(id);
+      const isImped = has && DATA.elevadores[id].impeditiva === item.num;
+      return `<div class="dot-wrap"><div class="dot ${has?'on':''} ${isImped?'imped':''}"></div></div>`;
+    }).join("");
+
+    const isExpanded = expandedNum === item.num;
+    const detailItems = ELEV_ORDER.filter(id => item.elevadores.hasOwnProperty(id)).map(id => {
+      const isImped = DATA.elevadores[id].impeditiva === item.num;
+      const obs = item.elevadores[id] && item.elevadores[id].trim().length
+        ? item.elevadores[id].replace(" [NÃO CONFORMIDADE IMPEDITIVA]","")
+        : "Sem observação detalhada registrada.";
+      return `<div class="detail-item ${isImped?'imped':''}"><span class="who">${ELEV_SHORT[id]} · ${id}</span>${obs}</div>`;
+    }).join("");
+
+    return `
+      <div class="row ${isExpanded?'expanded':''}" data-num="${item.num}">
+        <div class="cell-num">${item.num}</div>
+        <div class="cell-item">
+          <div class="cell-desc">${item.desc}<span class="overlap-badge ${overlapClass(n)}">${n} torre${n>1?'s':''}</span></div>
+          <div class="cell-sys">${item.sistema}</div>
+        </div>
+        <div class="cell-dots">${dots}</div>
+      </div>
+      <div class="row-detail"><div class="detail-grid">${detailItems}</div></div>
+    `;
+  }).join("");
+
+  document.getElementById("rows").innerHTML = html || '<div style="padding:24px;color:var(--ink-soft);font-size:13px;">Nenhum item corresponde ao filtro.</div>';
+
+  document.querySelectorAll(".row").forEach(r => {
+    r.addEventListener("click", () => {
+      const num = parseInt(r.getAttribute("data-num"));
+      expandedNum = (expandedNum === num) ? null : num;
+      renderRows();
+    });
+  });
+}
+
+function renderSystems(){
+  const el = document.getElementById("sysgrid");
+  const maxVal = Math.max(...ELEV_ORDER.map(id =>
+    Math.max(...DATA.sistemas_order.map(s => DATA.sistema_counts[id][s] || 0))
+  ), 1);
+
+  el.innerHTML = ELEV_ORDER.map(id => {
+    const bars = DATA.sistemas_order.map(s => {
+      const v = DATA.sistema_counts[id][s] || 0;
+      const pct = Math.round((v/maxVal)*100);
+      return `<div class="barrow">
+        <div class="lbl">${s}</div>
+        <div class="bartrack"><div class="barfill" style="width:${pct}%;"></div></div>
+        <div class="val">${v}</div>
+      </div>`;
+    }).join("");
+    return `<div class="syscol"><h4>${ELEV_SHORT[id]} · ${id}</h4>${bars}</div>`;
+  }).join("");
+}
+
+document.getElementById("seg-filter").addEventListener("click", (e) => {
+  if(e.target.tagName !== "BUTTON") return;
+  document.querySelectorAll("#seg-filter button").forEach(b=>b.classList.remove("active"));
+  e.target.classList.add("active");
+  currentFilter = e.target.getAttribute("data-f");
+  expandedNum = null;
+  renderRows();
+});
+
+document.getElementById("search").addEventListener("input", (e) => {
+  currentSearch = e.target.value;
+  renderRows();
+});
+
+renderTowers();
+renderRows();
+renderSystems();
+</script>
+</body>
+</html>
